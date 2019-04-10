@@ -63,7 +63,7 @@
                             </div>
                             <div id="queried-data" data-ng-if="message.result.length !== 0">
                                 <div class="images-searched">
-                                    <div data-ng-repeat="objectQuery in message.result" id="queried-image">
+                                    <!-- <div data-ng-repeat="objectQuery in message.result" id="queried-image">
                                         <div class="item">
                                             <a href="{{objectQuery.link}}" target="_blank">
                                                 <img ng-src="{{objectQuery.link}}"
@@ -71,7 +71,17 @@
                                                             margin-right:20px;padding-right: 10px;width:424.66px;height: 318.48px;" />
                                             </a>
                                         </div>
-                                    </div>
+                                    </div> -->
+                                    <data-owl-carousel id="first" class="owl-carousel"
+                                        data-options="{navigation: true, pagination: false, rewindNav : false}">
+                                        <div owl-carousel-item="" ng-repeat="objectQuery in message.result" class="item">
+                                            <a href="{{objectQuery.link}}" target="_blank">
+                                                <img ng-src="{{objectQuery.link}}"
+                                                    style="display:block;margin-left: 20px;
+                                                        margin-right:20px;padding-right: 10px;width:424.66px;height: 318.48px;" />
+                                            </a>
+                                        </div>
+                                    </data-owl-carousel>
                                 </div>
                             </div>
                         </div>

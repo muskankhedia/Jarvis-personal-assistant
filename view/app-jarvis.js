@@ -242,4 +242,42 @@ app.controller('MainController', function($scope,$location,$rootScope,$http) {
 			$scope.message = '';
 		}
 	};
-});
+}).directive('owlCarousel', function() {
+	return {
+		restrict: 'E',
+		transclude: false,
+		link: function (scope) {
+			scope.initCarousel = function(element) {
+			// provide any default options you want
+				var defaultOptions = {
+				};
+				var customOptions = scope.$eval($(element).attr('data-options'));
+				// combine the two options objects
+				for (var key in customOptions) {
+					defaultOptions[key] = customOptions[key];
+				}
+				// init carousel
+				// eslint-disable-next-line no-undef
+				var curOwl = $(element).data('owlCarousel');
+				// eslint-disable-next-line no-undef
+				if (!angular.isDefined(curOwl)) {
+					// eslint-disable-next-line no-undef
+					$(element).owlCarousel(defaultOptions);
+				}
+				scope.cnt++;
+			};
+		}
+	};
+})
+	.directive('owlCarouselItem', [function() {
+		return {
+			restrict: 'A',
+			transclude: false,
+			link: function(scope, element) {
+			// wait for the last item in the ng-repeat then call init
+				if (scope.$last) {
+					scope.initCarousel(element.parent());
+				}
+			}
+		};
+	}]);

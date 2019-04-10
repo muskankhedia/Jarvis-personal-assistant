@@ -300,7 +300,7 @@ func routes(routeObject response, w http.ResponseWriter) {
 
 					jData, _ := json.Marshal(responseJSON)
 					w.Write(jData)
-					TextToSpeech(responseJSON.Message + " " + filterForSpeech(wordStr), 0)
+					TextToSpeech(responseJSON.Message, 0)
 
 				} else {
 					query := "https://www.google.co.in/search?q=" + wordStr
